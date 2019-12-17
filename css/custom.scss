@@ -1,0 +1,344 @@
+$imagesPath: '../img/';
+
+@import 'mixins';
+@import 'colors';
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+}
+
+body {
+	background-color: $colorBlack;
+	font: 15px Helvetica, Arial, sans-serif;
+	height: 100vh;
+	color: $colorWhite;
+	@include linearGradient(0deg, $colorBlack, $sendButtonColor)
+}
+
+.row {
+	width: 1920px;
+
+	@media all and (max-width: 1920px){
+		width: 100%;
+	}
+}
+
+.jspHorizontalBar {
+	display: none !important;
+}
+
+p.noChats {
+	clear: both;
+	font-size: 12px;
+	padding: 10px;
+	text-align: center;
+	text-shadow: 1px 1px 0 #111111;
+	color: $colorWhite;
+}
+
+#chatErrorMessage {
+	position: fixed;
+	top: 0;
+	text-align: center;
+	height: 40px;
+	width: 100%;
+	line-height: 40px;
+	background-color: $colorRedLight;
+	z-index: 3;
+
+	@media all and (max-width: 1024px) {
+		font-size: 24px;
+		height: 80px;
+		line-height: 80px;
+	}
+}
+
+div {
+	&#chatContainer {
+		height: 100%;
+		overflow: hidden;
+
+		#chatTopBar {
+			position: fixed;
+			height: 40px;
+			color: $colorWhite;
+			margin-bottom: 15px;
+			width: 100%;
+			background-color: $colorDark;
+			z-index: 2;
+
+			@media all and (max-width: 1024px) {
+				height: 50px;
+			}
+
+			img {
+				left: 9px;
+				position: absolute;
+				top: 8px;
+
+				@media all and (max-width: 1024px) {
+					top: 10px;
+					left: 10px;
+					height: 30px;
+					width: 30px;
+					@include border-radius(100%);
+				}
+			}
+
+			.name {
+				position: absolute;
+				top: 10px;
+				left: 40px;
+
+				@media all and (max-width: 1024px) {
+					position: relative;
+					font-size: 18px;
+					left: 50px;
+					top: 13px;
+				}
+			}
+
+			a {
+				background-color: $colorRedLight2;
+				border: 1px solid transparent !important;
+				color: #FFFFFF !important;
+				font-size: 12px;
+				padding: 5px 9px;
+				position: absolute;
+				right: 10px;
+				top: 7px;
+
+				@media all and (max-width: 1024px) {
+					right: 10px;
+					top: 10px;
+					padding: 5px 15px;
+					height: 20px;
+					line-height: 20px;
+					font-size: 18px;
+				}
+			}
+		}
+
+		#chatLineHolder {
+			padding-top: 0;
+			padding-left: 10px;
+			margin-top: 50px;
+			@include calc('height', '100% - 121px');
+			@include calc('max-width', '100% - 175px');
+
+			@media all and (max-width: 1024px) {
+				margin-top: 60px;
+				overflow: scroll !important;
+				@include calc('max-width', '100% - 65px');
+				@include calc('height', '100% - 135px');
+			}
+
+			.jspContainer {
+				height: 100% !important;
+
+				.jspPane {
+					.chat {
+						position: relative;
+						background-color: $colorMain;
+						color: $colorWhite;
+						min-height: 24px;
+						padding: 8px;
+						margin: 0 10px 10px 30px;
+						word-break: break-all;
+						width: fit-content;
+						@include border-radius(0 5px 5px 5px);
+
+						@media all and (max-width: 1024px) {
+							margin: 0 10px 10px 45px;
+						}
+
+						&:before {
+							content: '';
+							position: absolute;
+							display: block;
+							top: 0;
+							left: -6px;
+							border: 3px solid transparent;
+							border-top-color: $colorMain;
+							border-right-color: $colorMain;
+						}
+
+						.gravatar {
+							left: -30px;
+							position: absolute;
+							top: 0;
+
+							img {
+								@include border-radius(100%);
+							}
+						}
+
+						.author {
+							margin-right: 6px;
+							font-size: 14px;
+							text-shadow: 1px 1px black;
+						}
+
+						.text {
+							color: white;
+							display: inline-block;
+							font-size: 15px;
+							overflow: hidden;
+							vertical-align: top;
+							padding-right: 40px;
+						}
+
+						.time {
+							position: absolute;
+							bottom: 10px;
+							right: 10px;
+							font-size: 11px;
+							color: $colorGrey9D;
+						}
+					}
+				}
+
+				.jspVerticalBar {
+					background: none;
+					width: 20px;
+					right: -3px;
+
+					@media all and (max-width: 1024px) {
+						right: auto;
+						left: 10px;
+					}
+
+					.jspTrack {
+						background-color: #202020;
+						border: 1px solid #111111;
+						width: 3px;
+						right: 0;
+
+						.jspDrag {
+							width: 7px;
+							left: -3px;
+							height: 20px !important;
+							margin-top: -5px;
+							border: 1px solid black;
+						}
+					}
+				}
+			}
+		}
+
+		#chatBottomBar {
+			background-color: $colorLight;
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+			padding: 10px;
+			height: 36px;
+
+			.tip {
+				position: absolute;
+				width: 0;
+				height: 0;
+				border: 10px solid transparent;
+				border-bottom-color: $colorLight;
+				top: -20px;
+				left: 20px;
+			}
+
+			form {
+				&#loginForm {
+					position: absolute;
+					top: 10px;
+					height: 36px;
+					width: calc(100% - 20px);
+					@include calc('width', '100% - 40px');
+					z-index: 2;
+					background-color: $colorLight;
+
+					input[name='name'] {
+						@include border-radius(18px 0 0 18px);
+					}
+
+					input[name='email'] {
+
+					}
+
+					input[name='name'], input[name='email'] {
+						height: 36px;
+						border: none;
+						@include calc('width', '50% - 64px');
+						outline: none;
+						background-color: $chatTextBack;
+						padding-left: 10px;
+						color: white;
+						font-size: 14px;
+						position: relative;
+					}
+
+					input[type='submit'] {
+						width: 100px;
+						position: absolute;
+						top: 0;
+						right: 0;
+						height: 36px;
+						border: none;
+						@include border-radius(0 18px 18px 0);
+						color: white;
+						font-weight: 600;
+						background-color: $sendButtonColor;
+						text-align: center;
+					}
+				}
+
+				&#submitForm {
+					position: absolute;
+					top: 10px;
+					height: 36px;
+					width: calc(100% - 20px);
+					@include calc('width', '100% - 20px');
+
+					input[name='name'] {
+						@include border-radius(18px 0 0 18px);
+						height: 36px;
+						border: none;
+						width: 100px;
+						outline: none;
+						background-color: $chatTextBack;
+						padding-left: 10px;
+						color: white;
+						font-size: 14px;
+						position: relative;
+					}
+
+					#chatText {
+						height: 36px;
+						border: none;
+						width: calc(100% - 320px);
+						outline: none;
+						background-color: $chatTextBack;
+						border-radius: 0;
+						padding-left: 10px;
+						color: white;
+						font-size: 14px;
+						position: relative;
+						padding-right: 161px
+					}
+
+					input[type='submit'] {
+						width: 151px;
+						position: absolute;
+						top: 0;
+						right: 20px;
+						height: 36px;
+						border: none;
+						border-radius: 0 18px 18px 0;
+						color: white;
+						font-weight: 600;
+						background-color: $sendButtonColor;
+					}
+				}
+			}
+		}
+	}
+}
